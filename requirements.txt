@@ -1,0 +1,19 @@
+
+# Python 3.11.10 compatible starter dependencies
+
+# Frontend UI
+streamlit==1.50.0
+
+# API backend
+fastapi==0.119.0
+uvicorn[standard]==0.37.0
+
+# Configuration and validation
+python-dotenv==1.1.1
+pydantic-settings==2.11.0
+
+# HTTP/API integrations
+httpx==0.28.1
+
+# Testing
+pytest==8.4.2
