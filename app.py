@@ -2,7 +2,7 @@
 import streamlit as st
 import httpx
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://paypilot-ai-latest.onrender.com/"
 
 st.set_page_config(
     page_title="PayPilot AI",
