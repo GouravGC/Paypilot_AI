@@ -2,7 +2,8 @@
 import streamlit as st
 import httpx
 
-API_URL = "https://paypilot-ai-latest.onrender.com/"
+# Render-hosted FastAPI backend
+API_URL = "https://paypilot-ai-latest.onrender.com"
 
 st.set_page_config(
     page_title="PayPilot AI",
@@ -18,13 +19,17 @@ st.write(
     "clarify your shopping requirements."
 )
 
+# Backend health check
 if st.button("Check Backend Connection"):
     try:
-        response = httpx.get(f"{API_URL}/health", timeout=5)
+        response = httpx.get(
+            f"{API_URL}/health",
+            timeout=30,
+        )
         response.raise_for_status()
         st.success("Backend connection successful!")
-    except httpx.HTTPError:
-        st.error("Backend unavailable. Check the first terminal.")
+    except httpx.HTTPError as exc:
+        st.error(f"Backend connection failed: {exc}")
 
 st.divider()
 st.header("AI Shopping Assistant")
@@ -59,3 +64,5 @@ if st.button("Ask PayPilot AI", type="primary"):
             )
         except httpx.RequestError as exc:
             st.error(f"Could not reach the backend: {exc}")
+        except (KeyError, ValueError) as exc:
+            st.error(f"Unexpected backend response: {exc}")
